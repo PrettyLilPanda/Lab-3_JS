@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Chain with Error</title>
+</head>
+<body>
+
+    <script>
+    const login = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Step 1: User logged in.");
+            resolve({ userId: 123 });
+        }, 1000);
+    });
+};
+
+    const getProfile = (userId) => {
+        return new Promise((resolve, reject) => {
+        const isError = true;
+
+        setTimeout(() => {
+            if (isError) {
+                reject("Failed to fetch profile.");
+            } else {
+                console.log(`Step 2: Fetching profile for user ID ${userId}.`);
+                resolve({ name: "Ahmad", status: "Active" });
+            }
+        }, 1000);
+    });
+};
+
+login()
+    .then((user) => {
+        return getProfile(user.userId);
+    })
+    .then((profile) => {
+        console.log("Step 3: Profile details received:", profile);
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Chain</title>
+</head>
+<body>
+
+    <script>
+    const fetchProductIds = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Step 1: Product IDs fetched.");
+            resolve([101, 102, 103]);
+        }, 1000);
+    });
+};
+
+    const fetchProductDetails = (productId) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log(`Step 2: Fetching details for product ID ${productId}.`);
+            resolve({ id: productId, name: "Product A", price: 500 });
+        }, 1000);
+    });
+};
+
+    fetchProductIds()
+    .then((ids) => {
+        return fetchProductDetails(ids[0]);
+    })
+    .then((product) => {
+        console.log("Step 3: Product details received:", product);
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+
+    </script>
+
+</body>
+</html>

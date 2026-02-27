@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Buffer</title>
+</head>
+<body>
+    
+    <script>
+        
+    const buffer = new ArrayBuffer(16);
+    const uint8View = new Uint8Array(buffer);
+
+    for (let i = 0; i < uint8View.length; i++) {
+      uint8View[i] = i + 65;
+    }
+
+    console.log("Uint8Array data:", uint8View);
+
+    const decoder = new TextDecoder();
+    const decoded = decoder.decode(buffer);
+
+    console.log("Decoded result:", decoded); 
+
+    </script>
+
+</body>
+</html>
